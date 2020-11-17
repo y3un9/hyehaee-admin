@@ -1,0 +1,7 @@
+/* Created on 2020/10/30 by SubwaySamurai */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}

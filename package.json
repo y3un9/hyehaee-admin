@@ -1,0 +1,13 @@
+{
+  "name": "hyehaee-admin",
+  "version": "0.0.1",
+  "description": "一个会变得很棒的后台管理框架",
+  "author": "SubwaySamurai",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "mockjs": "^1.1.0"
+  }
+}
