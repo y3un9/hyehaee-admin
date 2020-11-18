@@ -5,25 +5,17 @@
  * @description 侧边栏菜单
  */
 
-// import Component from '../Component';
-import Component from '../../../../../YUI个人组件库/yui-component/Component';
+import Menu from '../../../../../YUI个人组件库/yui-component/Menu';
 
 /**
  * @constructor SiderMenu
- * @extends Component
+ * @extends Menu
  * @param {string|HTMLElement} selector 
  */
 function SiderMenu (selector) {
-    Component.call(this, selector);
-
+    Menu.call(this, selector);
 }
-SiderMenu.prototype = Object.create(Component.prototype);
+SiderMenu.prototype = Object.create(Menu.prototype);
 SiderMenu.prototype.constructor = SiderMenu;
-/**
- * @method init
- */
-SiderMenu.prototype.init = function () {
-
-};
 export default SiderMenu;
 

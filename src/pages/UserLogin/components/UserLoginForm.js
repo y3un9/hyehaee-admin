@@ -7,6 +7,8 @@
 
 import Form from '../../../../../../YUI个人组件库/yui-component/Form';
 
+import * as service from '../../../services';
+
 /**
  * @constructor 用户登录表单
  * @extends Form
@@ -17,6 +19,10 @@ function UserLoginForm (selector) {
 
     /** @override */
     this.submitBtnElem = this.formElem.querySelector('button[type="submit"]');
+
+    this.forgetPasswordBtnElem = this.formElem.querySelector('#UserForgetPasswordBtn');
+
+    this.handleForgetPasswordBtnClick = this.handleForgetPasswordBtnClick.bind(this);
 }
 UserLoginForm.prototype = Object.create(Form.prototype);
 UserLoginForm.prototype.constructor = UserLoginForm;
@@ -25,13 +31,33 @@ UserLoginForm.prototype.constructor = UserLoginForm;
  * @method init
  */
 UserLoginForm.prototype.init = function () {
-
+    this.forgetPasswordBtnElem.addEventListener('click', this.handleForgetPasswordBtnClick);
 };
 /**
  * @override
  * @method submit
  */
-UserLoginForm.prototype.submit = function () {
-
+UserLoginForm.prototype.submit = async function () {
+    var form_data = this.getFormData();
+    var result = await service.fetchUserLogin({
+        username: form_data.username,
+        password: form_data.password
+    });
+    console.log('form_data', form_data);
+    if (!result ||
+        result.auth !== 'true' ||
+        result.status !== 'true') {
+        // TODO:
+    }
+    // TODO: 
+};
+/**
+ * 处理忘记密码按钮 click 事件
+ * @method handleForgetPasswordBtnClick
+ * @param {MouseEvent} e 
+ */
+UserLoginForm.prototype.handleForgetPasswordBtnClick = function (e) {
+    // 跳转至找回密码页
+    app.router.push('/user/findpassword');
 };
 export default UserLoginForm;

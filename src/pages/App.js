@@ -38,22 +38,27 @@ App.prototype.constructor = App;
  */
 App.prototype.init = function () {
     this.menu.init();
-    // TODO: 初始化页面
+    // TODO: 初始化各页面
 };
 /**
+ * 检查用户鉴权
  * @method checkAuth
  */
 App.prototype.checkAuth = function () {
     
 };
 /**
- * @function 
- * @param {Component} componentClass
- * @param {string|HTMLElement} selector 
+ * 检查浏览器地址
+ * @method checkAddress
  */
-App.prototype. = function (componentClass, selector) {
-    var componentInstance = new componentClass(selector);
-    return componentInstance;
+App.prototype.checkAddress = function () {
+
+};
+/**
+ * @method fetchAppData
+ */
+App.prototype.fetchAppData = function () {
+
 };
 /**
  * @method exit

@@ -3,11 +3,16 @@
   "version": "0.0.1",
   "description": "一个会变得很棒的后台管理框架",
   "author": "SubwaySamurai",
-  "license": "MIT",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack --config ./webpack.config.js --progress --devtool eval-source-map"
   },
   "devDependencies": {
-    "mockjs": "^1.1.0"
+    "@babel/core": "^7.12.3",
+    "babel-loader": "^8.2.1",
+    "mockjs": "^1.1.0",
+    "webpack": "^5.5.0",
+    "webpack-cli": "^4.2.0"
   }
 }
