@@ -8,7 +8,7 @@
 import Page from '../../components/Page';
 
 /**
- * @constructor HomePage
+ * @constructor 首页
  * @extends Page
  * @param {string|HTMLElement} selector 
  */

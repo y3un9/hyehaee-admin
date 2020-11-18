@@ -6,16 +6,17 @@
  */
 
 import Page from '../../components/Page';
+import UserRegisterForm from './components/UserRegisterForm';
 
 /**
- * @constructor UserRegisterPage
+ * @constructor 用户注册页
  * @extends Page
  * @param {string|HTMLElement} selector 
  */
 function UserRegisterPage (selector) {
     Page.call(this, selector);
 
-    this.state = {};
+    this.form = new UserRegisterPage(this.rootElem.queryselector('form'));
 }
 UserRegisterPage.prototype = Object.create(Page.prototype);
 UserRegisterPage.prototype.constructor = UserRegisterPage;
@@ -23,12 +24,18 @@ UserRegisterPage.prototype.constructor = UserRegisterPage;
  * @method init
  */
 UserRegisterPage.prototype.init = function () {
-    
+    this.form.init();
+};
+/**
+ * @method fetchPageData
+ */
+UserRegisterPage.prototype.fetchPageData = function () {
+
 };
 /**
  * @method render
  */
 UserRegisterPage.prototype.render = function () {
-    
+    this.form.reset();
 };
 export default UserRegisterPage;

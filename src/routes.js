@@ -6,14 +6,13 @@
  */
 
 import constant from './utils/constant';
-
+// 各种页面组件
 import UserLoginPage from './pages/UserLogin';
 import UserRegisterPage from './pages/UserRegister';
+import UserFindPasswordPage from './pages/UserFindPassword';
 import HomePage from './pages/Home';
-
 /** 基础路由路径 */
 var basic_route_path = constant.ROUTE_PREFIX;
-
 export default {
     prefix: basic_route_path,
     routeList: [
@@ -24,6 +23,10 @@ export default {
         {
             component: window.userRegisterPage = new UserRegisterPage('#UserRegisterPage'),
             path: '/user/register'
+        },
+        {
+            component: window.userFindPasswordPage = new UserFindPasswordPage('#UserFindPasswordPage'),
+            path: '/user/findpassword'
         },
         {
             component: window.homePage = new HomePage('#HomePage'),

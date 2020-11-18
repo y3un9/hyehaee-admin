@@ -18,7 +18,7 @@ function Router (routes) {
  * 创建新浏览器历史
  * @method push
  * @param {*} data 
- * @param {*} title 
+ * @param {string} title 
  * @param {string} url 
  */
 Router.push = function (data, title, url) {
@@ -30,7 +30,7 @@ Router.push = function (data, title, url) {
  * 替换当前浏览器历史
  * @method replace
  * @param {*} data 
- * @param {*} title 
+ * @param {string} title 
  * @param {string} url 
  */
 Router.replace = function (data, title, url) {

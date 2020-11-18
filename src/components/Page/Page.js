@@ -5,7 +5,8 @@
  * @description 页面基类
  */
 
-import Component from './Component';
+// import Component from './Component';
+import Component from '../../../../../YUI个人组件库/yui-component/Component';
 
 /**
  * @constructor 页面

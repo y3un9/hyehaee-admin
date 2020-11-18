@@ -5,7 +5,8 @@
  * @description 侧边栏菜单
  */
 
-import Component from '../Component';
+// import Component from '../Component';
+import Component from '../../../../../YUI个人组件库/yui-component/Component';
 
 /**
  * @constructor SiderMenu
