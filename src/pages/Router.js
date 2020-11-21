@@ -82,8 +82,8 @@ Router.getSearch = function () {
     if (arr_search.length === 1) { // 地址栏没有查询参数或只有?后面没数据 ['']
         return {};
     }
-    'asd=qwe'
-    'asd=qwe&zxc=jkl'
+    '?asd=qwe'
+    '?asd=qwe&zxc=jkl'
     console.log('arr_search', arr_search);
     var arr_search = arr_search[1].split('&');
     console.log('arr_search', arr_search);
@@ -114,24 +114,25 @@ Router.handle = function () {
         item.component.hide();
     });
 
-    var current_path = router.getPath(); // 获取当前浏览器地址栏路径 /asd/zxc
+    /** 获取当前浏览器地址栏路径 /asd/zxc */
+    var current_path = router.getPath();
     console.log('current_path', current_path);
 
     // 对菜单进行高亮
-    var menu_item_elems = document.querySelectorAll('.menu-item');
-    Array.prototype.forEach.call(menu_item_elems, function (elem) {
-        var menu_link_elem = elem.querySelector('.menu-link');
+    var menu_item_elems = app.menu.getMenuItemElems();
+    Array.prototype.forEach.call(menu_item_elems, function (elem, index, array) {
+        var menu_link_elem = elem.querySelector(`.${app.menu.state.menuItemLinkClassName}`);
         if (menu_link_elem.getAttribute('href') !== current_path) {
-            elem.classList.remove('active');
+            elem.classList.remove(app.menu.state.menuItemActiveClassName);
             return;
         }
-        elem.classList.add('active');
+        elem.classList.add(app.menu.state.menuItemActiveClassName);
     });
 
     var breadcrumb_menu_item_array = [];
     // 找出构成面包屑的菜单元素组成数组
     // 可以直接通过active的menu-item拿到面包屑，妙啊，不用从菜单根元素一个一个向下查找了
-    var menu_item_active_elem = document.querySelector('.menu-item.active');
+    var menu_item_active_elem = app.menu.getActiveMenuItemElem();
     console.log('menu_item_active_elem', menu_item_active_elem);
     if (!menu_item_active_elem) { // 没有高亮菜单子项，可能当前显示的视图是登录视图或错误视图
         document.getElementById('Breadcrumb').innerHTML = '';
@@ -157,8 +158,8 @@ Router.handle = function () {
         console.log('menu_link_text', menu_link_text);
         var menu_link_href = menu_link_elem.getAttribute('href');
         console.log('menu_link_href', menu_link_href);
-
-        if (index === breadcrumb_menu_item_array.length - 1) { // 数组的最后一个是当前视图，不需要链接
+        // 数组的最后一个是当前视图，不需要链接
+        if (index === breadcrumb_menu_item_array.length - 1) {
             txt +=
                 '<span class="breadcrumb-item">' +
                     '<span>' +
@@ -168,8 +169,8 @@ Router.handle = function () {
                 '</span>';
             return;
         }
-
-        if (!menu_link_href) { // 没有href属性，代表这个菜单子项有子菜单
+        // 没有href属性，代表这个菜单子项有子菜单
+        if (!menu_link_href) {
             txt +=
                 '<span class="breadcrumb-item">' +
                     '<span>' +

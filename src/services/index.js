@@ -49,3 +49,31 @@ export async function fetchUserLogin (data) {
     };
     return await request.postJSON(app.state.requestUrl, map);
 }
+
+/**
+ * @author SubwaySamurai
+ * @date 2020/11/20
+ * @description 请求用户注册
+ * 
+ * @async
+ * @function fetchUserRegister
+ * @param {ReqData_USER_REGISTER} data
+ * @returns {Promise<RespData_USER_REGISTER>}
+ * 
+ * @typedef {Object} ReqData_USER_REGISTER
+ * @property {string} username
+ * @property {string} password
+ * 
+ * @typedef {Object} RespData_USER_REGISTER
+ * @property {RespRet_USER_REGISTER} ret
+ * 
+ * @typedef {Object} RespRet_USER_REGISTER  
+ */
+export async function fetchUserRegister (data) {
+    var map = {
+        action: 'USER_REGISTER',
+        body: data,
+        user: globalStore.user.uid
+    };
+    return await request.postJSON(app.state.requestUrl, map);
+}
