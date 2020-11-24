@@ -1,0 +1,40 @@
+/* Created by SubwaySamurai on 2020/11/24 */
+
+.sidebar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 256px;
+    height: 100%;
+    overflow: auto;
+}
+.sidebar-header {
+
+}
+.sidebar-content {
+    flex: 1 1 0;
+    height: 0;
+    padding: 16px 0;
+}
+.sidebar-footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.sidebar-brand {
+
+}
+.brand-title {
+    
+}
+.brand-description {
+
+}
+
+

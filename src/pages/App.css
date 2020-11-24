@@ -1,1 +1,8 @@
 /* Created on 2020/11/6 by SubwaySamurai */
+
+#App {
+    display: block;
+    height: 100%;
+    overflow: auto;
+}
+

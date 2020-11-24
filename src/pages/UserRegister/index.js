@@ -16,7 +16,7 @@ import UserRegisterForm from './components/UserRegisterForm';
 function UserRegisterPage (selector) {
     Page.call(this, selector);
 
-    this.form = new UserRegisterPage(this.rootElem.queryselector('form'));
+    this.form = new UserRegisterForm(this.rootElem.queryselector('form'));
 }
 UserRegisterPage.prototype = Object.create(Page.prototype);
 UserRegisterPage.prototype.constructor = UserRegisterPage;
