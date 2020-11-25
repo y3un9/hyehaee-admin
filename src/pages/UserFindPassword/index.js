@@ -14,7 +14,7 @@ import UserFindPasswordFrom from './components/UserFindPasswordForm';
  * @param {string|HTMLElement} selector 
  */
 function UserFindPasswordPage (selector) {
-    Page.call(this, id);
+    Page.call(this, selector);
 
     this.form = new UserFindPasswordFrom(this.rootElem.querySelector('form'));
 }

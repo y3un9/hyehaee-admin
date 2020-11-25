@@ -16,7 +16,7 @@ function GlobalStore (initialStore) {
  * @param {string} key 
  * @returns {Object}
  */
-GlobalStore.set = function (newStore) {
+GlobalStore.prototype.set = function (newStore) {
     if (!newStore || typeof newStore !== 'object') {
         return;
     }
@@ -35,7 +35,7 @@ GlobalStore.set = function (newStore) {
  * @param {string} key
  * @returns {*} 
  */
-GlobalStore.get = function (key) {
+GlobalStore.prototype.get = function (key) {
     if (typeof key !== 'number' || typeof key !== 'string') {
         return;
     }

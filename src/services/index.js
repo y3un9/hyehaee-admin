@@ -23,6 +23,35 @@ import * as request from '../utils/request';
 
 /**
  * @author SubwaySamurai
+ * @date 2020/11/25
+ * @description 请求用户鉴权
+ * 
+ * @async
+ * @function fetchUserAuth
+ * @param {ReqData_USER_AUTH} data
+ * @returns {Promise<RespData_USER_AUTH>}
+ * 
+ * @typedef {Object} ReqData_USER_AUTH
+ * @property {string} session
+ * 
+ * @typedef {Object} RespData_USER_AUTH
+ * @property {RespRet_USER_AUTH} ret
+ * 
+ * @typedef {Object} RespRet_USER_AUTH
+ * @property {string} uid
+ */
+export async function fetchUserAuth (data) {
+    var action = 'USER_AUTH'
+    var map = {
+        action: action,
+        body: data,
+        user: null
+    };
+    return await request.postJSON(app.state.requestUrl, map);
+}
+
+/**
+ * @author SubwaySamurai
  * @date 2020/11/18
  * @description 请求用户登录
  * 
@@ -39,11 +68,12 @@ import * as request from '../utils/request';
  * @property {RespRet_USER_LOGIN} ret
  * 
  * @typedef {Object} RespRet_USER_LOGIN
- * @property {Object} user
+ * @property {string} uid
  */
 export async function fetchUserLogin (data) {
+    var action = 'USER_LOGIN';
     var map = {
-        action: 'USER_LOGIN',
+        action: action,
         body: data,
         user: globalStore.user.uid
     };
@@ -70,8 +100,36 @@ export async function fetchUserLogin (data) {
  * @typedef {Object} RespRet_USER_REGISTER  
  */
 export async function fetchUserRegister (data) {
+    var action = 'USER_REGISTER';
     var map = {
-        action: 'USER_REGISTER',
+        action: action,
+        body: data,
+        user: globalStore.user.uid
+    };
+    return await request.postJSON(app.state.requestUrl, map);
+}
+
+/**
+ * @author SubwaySamurai
+ * @date 2020/11/25
+ * @description 请求获取应用数据
+ * 
+ * @async
+ * @function fetchAppData
+ * @param {ReqData_APP_DATA} data 
+ * @returns {Promise<RespData_APP_DATA>}
+ * 
+ * @typedef {Object} ReqData_APP_DATA
+ * 
+ * @typedef {Object} RespData_APP_DATA
+ * @property {RespRet_APP_DATA} ret
+ * 
+ * @typedef {Object}  RespRet_APP_DATA
+ */
+export async function fetchAppData (data) {
+    var action = 'APP_DATA';
+    var map = {
+        action: action,
         body: data,
         user: globalStore.user.uid
     };

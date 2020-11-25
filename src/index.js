@@ -17,12 +17,11 @@ import constant from './utils/constant';
 var runtime = constant.RUNTIME.DEV;
 // 生产环境下移除所有控制台打印
 (function () {
-    if (runtime !== constant.RUNTIME.PRD) {
-        return;
+    if (runtime === constant.RUNTIME.PRD) {
+        Object.keys(Window.console).forEach(function (key, index, array) {
+            window.console[key] = function () {};
+        });
     }
-    Object.keys(Window.console).forEach(function (key, index, array) {
-        window.console[key] = function () {};
-    });
 }());
 
 /**
@@ -47,15 +46,27 @@ function handleDocumentReadyStateChange (e) {
 /**
  * 处理文档 DOMContentLoaded 事件
  * @function handleDocumentDOMContentLoaded
- * @param {UIEvent} e 
+ * @param {UIEvent} e
  */
-function handleDocumentDOMContentLoaded (e) {
+async function handleDocumentDOMContentLoaded (e) {
     document.addEventListener('visibilityChange', handleDocumentVisibilityChange);
     window.addEventListener('load', handleWindowLoad);
     window.addEventListener('beforeunload', handleWindowBeforeUnload);
     window.addEventListener('unload', handleWindowUnload);
     window.addEventListener('resize', handleWindowResize);
-    app.checkAuth();
+    // 先显示应用加载页面，再去做应用使用前动作
+    // TODO: 如何显示加载页面，需不需要路由跳转？？？在这里一共有几种情况：
+    // 1. 用户访问网站时 pathname 是路由表种其中一个路由地址
+    // 2. 
+    var result = await app.checkAuth();
+    // 检查用户鉴权是否通过
+    if (result) {
+        // 跳转至默认路由
+        app.router.push();
+    } else {
+        // 跳转至登录路由
+        app.router.push('/user/login');
+    }
 }
 
 /**
@@ -73,9 +84,9 @@ function handleDocumentVisibilityChange (e) {
     } else if (document.visibilityState === 'prerender') {
         // 不会执行这里，文档只会从 prerender 转换为其它状态，不会从其它状态转换为 prerender
     } else if (document.visibilityState === 'unloaded') {
-
-    } else {
         // 不会执行这里
+    } else {
+        // 不会执行这里，document.visibilityState 的取值只有上述 4 种
     }
 }
 
@@ -104,7 +115,7 @@ function handleWindowResize (e) {
  */
 function handleWindowBeforeUnload (e) {
     e.preventDefault();
-    // TODO: 如果需要清除定时器
+    // TODO: 如果需要用户确认是否离开页面 
 }
 
 /**
@@ -113,7 +124,7 @@ function handleWindowBeforeUnload (e) {
  * @param {UIEvent} e 
  */
 function handleWindowUnload (e) {
-    // TODO: 如果需要清除定时器
+    app.exit();
 }
 
 // 入口
@@ -125,6 +136,6 @@ if (document.readyState === 'loading') {
 }
 
 /** 应用实例 */
-var app = window.app = new App('#App');
-var appRouter = window.appRouter = app.router = new Router(routes);
-var globalStore = window.globalStore = new Store(model);
+window.app = new App('#App');
+window.appRouter = app.router = new Router(routes);
+window.globalStore = new Store(model);

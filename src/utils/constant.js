@@ -17,5 +17,10 @@ export default {
     /** 应用类型 */
     APP_TYPE: 'UI',
     /** 路由前缀 */
-    ROUTE_PREFIX: ''
+    ROUTE_PREFIX: '',
+
+    /**  */
+    UIP_RESP_AUTH_SUCCESS: 'true',
+    /**  */
+    UIP_RESP_STATUS_SUCCESS: 'true'
 };

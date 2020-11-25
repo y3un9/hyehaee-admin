@@ -5,15 +5,26 @@
  * @description 路由
  */
 
+import Component from '../../../../YUI个人组件库/yui-component/Component';
+
 import util from '../utils/util';
 
 /**
+ * @typedef {Object} Route
+ * @property {Component} component
+ * @property {string} path 
+ */
+
+/**
  * @constructor 路由
- * @param {Array<Route>} routes
+ * @param {{ prefix: string, routeList: Array<Route> }} routes
  */
 function Router (routes) {
-    
+    this.routePrefix = routes.prefix;
+    this.routeList = routes.routeList;
 }
+Router.prototype = Object.create(null);
+Router.prototype.constructor = Router;
 /**
  * 创建新浏览器历史
  * @method push
@@ -21,7 +32,7 @@ function Router (routes) {
  * @param {string} title 
  * @param {string} url 
  */
-Router.push = function (data, title, url) {
+Router.prototype.push = function (data, title, url) {
     console.log('history pushState', 'data', data, 'title', title, 'url', url);
     window.history.pushState(data, title, url);
     this.handle();
@@ -33,7 +44,7 @@ Router.push = function (data, title, url) {
  * @param {string} title 
  * @param {string} url 
  */
-Router.replace = function (data, title, url) {
+Router.prototype.replace = function (data, title, url) {
     console.log('history replaceState', 'data', data, 'title', title, 'url', url);
     window.history.replaceState(data, title, url);
     this.handle();
@@ -43,7 +54,7 @@ Router.replace = function (data, title, url) {
  * @method getPath
  * @returns {string}
  */
-Router.getPath = function () {
+Router.prototype.getPath = function () {
     var pathname = window.location.pathname;
     console.log('pathname', pathname);
     return pathname;
@@ -53,7 +64,7 @@ Router.getPath = function () {
  * @method getHash
  * @returns {string}
  */
-Router.getHash = function () {
+Router.prototype.getHash = function () {
     var hash = window.location.hash;
     console.log('hash', hash);
     if (!hash) {
@@ -72,7 +83,7 @@ Router.getHash = function () {
  * @method getSearch
  * @returns {Object}
  */
-Router.getSearch = function () {
+Router.prototype.getSearch = function () {
     var search = window.location.search;
     console.log('search', search);
     ''
@@ -108,9 +119,9 @@ Router.getSearch = function () {
  * 获取地址栏路径进行页面切换
  * @method handle
  */
-Router.handle = function () {
+Router.prototype.handle = function () {
     // 隐藏所有视图
-    this.routes.forEach(function (item) {
+    this.routeList.forEach(function (item) {
         item.component.hide();
     });
 
@@ -192,14 +203,14 @@ Router.handle = function () {
     document.getElementById('Breadcrumb').innerHTML = txt;
 
     // 遍历查找目标路由
-    console.log('routes', this.routes);
-    var target_route = util.getTargetItemFromArrayByKey(this.routes, current_path, 'path');
+    console.log('routeList', this.routeList);
+    var target_route = util.getTargetItemFromArrayByKey(this.routeList, current_path, 'path');
     console.log('target_route', target_route);
-    if (!target_route) {
-        // FIXME: 没有匹配到路由
-        return;
+    if (target_route) {
+        target_route.component.show();
+        target_route.component.render();
+    } else {
+        // TODO: 没有匹配到路由应该做些啥
     }
-    target_route.component.show();
-    target_route.component.render();
 };
 export default Router;
