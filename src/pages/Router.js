@@ -126,81 +126,81 @@ Router.prototype.handle = function () {
     });
 
     /** 获取当前浏览器地址栏路径 /asd/zxc */
-    var current_path = router.getPath();
+    var current_path = this.getPath();
     console.log('current_path', current_path);
 
-    // 对菜单进行高亮
-    var menu_item_elems = app.menu.getMenuItemElems();
-    Array.prototype.forEach.call(menu_item_elems, function (elem, index, array) {
-        var menu_link_elem = elem.querySelector(`.${app.menu.state.menuItemLinkClassName}`);
-        if (menu_link_elem.getAttribute('href') !== current_path) {
-            elem.classList.remove(app.menu.state.menuItemActiveClassName);
-            return;
-        }
-        elem.classList.add(app.menu.state.menuItemActiveClassName);
-    });
+    // // 对菜单进行高亮
+    // var menu_item_elems = app.menu.getMenuItemElems();
+    // Array.prototype.forEach.call(menu_item_elems, function (elem, index, array) {
+    //     var menu_link_elem = elem.querySelector(`.${app.menu.state.menuItemLinkClassName}`);
+    //     if (menu_link_elem.getAttribute('href') !== current_path) {
+    //         elem.classList.remove(app.menu.state.menuItemActiveClassName);
+    //         return;
+    //     }
+    //     elem.classList.add(app.menu.state.menuItemActiveClassName);
+    // });
 
-    var breadcrumb_menu_item_array = [];
-    // 找出构成面包屑的菜单元素组成数组
-    // 可以直接通过active的menu-item拿到面包屑，妙啊，不用从菜单根元素一个一个向下查找了
-    var menu_item_active_elem = app.menu.getActiveMenuItemElem();
-    console.log('menu_item_active_elem', menu_item_active_elem);
-    if (!menu_item_active_elem) { // 没有高亮菜单子项，可能当前显示的视图是登录视图或错误视图
-        document.getElementById('Breadcrumb').innerHTML = '';
-        return;
-    }
-    breadcrumb_menu_item_array.unshift(menu_item_active_elem);
-    var menu_item_current_elem = menu_item_active_elem;
-    while (menu_item_current_elem.parentElement.id !== menu.rootId) {
-        menu_item_current_elem = menu_item_current_elem.parentElement;
-        console.log('menu_item_current_elem', menu_item_current_elem);
-        if (menu_item_current_elem.tagName !== 'LI') {
-            continue;
-        }
-        breadcrumb_menu_item_array.unshift(menu_item_current_elem);
-    }
-    console.log('breadcrumb_menu_item_array', breadcrumb_menu_item_array);
-    var txt = '';
-    breadcrumb_menu_item_array.forEach(function (item, index) {
-        var menu_link_elem = item.querySelector('.menu-link');
-        var menu_link_icon_class = menu_link_elem.querySelector('i').className;
-        console.log('menu_link_icon_class', menu_link_icon_class);
-        var menu_link_text = menu_link_elem.querySelector('span').innerHTML;
-        console.log('menu_link_text', menu_link_text);
-        var menu_link_href = menu_link_elem.getAttribute('href');
-        console.log('menu_link_href', menu_link_href);
-        // 数组的最后一个是当前视图，不需要链接
-        if (index === breadcrumb_menu_item_array.length - 1) {
-            txt +=
-                '<span class="breadcrumb-item">' +
-                    '<span>' +
-                        '<i class="' + menu_link_icon_class + '"></i>' +
-                        menu_link_text +
-                    '</span>' +
-                '</span>';
-            return;
-        }
-        // 没有href属性，代表这个菜单子项有子菜单
-        if (!menu_link_href) {
-            txt +=
-                '<span class="breadcrumb-item">' +
-                    '<span>' +
-                        '<i class="' + menu_link_icon_class + '"></i>' +
-                        menu_link_text +
-                    '</span>' +
-                '</span>';
-            return;
-        }
-        // 有href属性，代表这个菜单子项无子菜单
-        txt +=
-            '<span class="breadcrumb-item">' +
-                '<a href="' + menu_link_href + '">' +
-                    '<i class="' + menu_link_icon_class + '"></i>' +
-                    menu_link_text +
-                '</a>' +
-            '</span>';
-    });
-    document.getElementById('Breadcrumb').innerHTML = txt;
+    // var breadcrumb_menu_item_array = [];
+    // // 找出构成面包屑的菜单元素组成数组
+    // // 可以直接通过active的menu-item拿到面包屑，妙啊，不用从菜单根元素一个一个向下查找了
+    // var menu_item_active_elem = app.menu.getActiveMenuItemElem();
+    // console.log('menu_item_active_elem', menu_item_active_elem);
+    // if (!menu_item_active_elem) { // 没有高亮菜单子项，可能当前显示的视图是登录视图或错误视图
+    //     document.getElementById('Breadcrumb').innerHTML = '';
+    //     return;
+    // }
+    // breadcrumb_menu_item_array.unshift(menu_item_active_elem);
+    // var menu_item_current_elem = menu_item_active_elem;
+    // while (menu_item_current_elem.parentElement.id !== menu.rootId) {
+    //     menu_item_current_elem = menu_item_current_elem.parentElement;
+    //     console.log('menu_item_current_elem', menu_item_current_elem);
+    //     if (menu_item_current_elem.tagName !== 'LI') {
+    //         continue;
+    //     }
+    //     breadcrumb_menu_item_array.unshift(menu_item_current_elem);
+    // }
+    // console.log('breadcrumb_menu_item_array', breadcrumb_menu_item_array);
+    // var txt = '';
+    // breadcrumb_menu_item_array.forEach(function (item, index) {
+    //     var menu_link_elem = item.querySelector('.menu-link');
+    //     var menu_link_icon_class = menu_link_elem.querySelector('i').className;
+    //     console.log('menu_link_icon_class', menu_link_icon_class);
+    //     var menu_link_text = menu_link_elem.querySelector('span').innerHTML;
+    //     console.log('menu_link_text', menu_link_text);
+    //     var menu_link_href = menu_link_elem.getAttribute('href');
+    //     console.log('menu_link_href', menu_link_href);
+    //     // 数组的最后一个是当前视图，不需要链接
+    //     if (index === breadcrumb_menu_item_array.length - 1) {
+    //         txt +=
+    //             '<span class="breadcrumb-item">' +
+    //                 '<span>' +
+    //                     '<i class="' + menu_link_icon_class + '"></i>' +
+    //                     menu_link_text +
+    //                 '</span>' +
+    //             '</span>';
+    //         return;
+    //     }
+    //     // 没有href属性，代表这个菜单子项有子菜单
+    //     if (!menu_link_href) {
+    //         txt +=
+    //             '<span class="breadcrumb-item">' +
+    //                 '<span>' +
+    //                     '<i class="' + menu_link_icon_class + '"></i>' +
+    //                     menu_link_text +
+    //                 '</span>' +
+    //             '</span>';
+    //         return;
+    //     }
+    //     // 有href属性，代表这个菜单子项无子菜单
+    //     txt +=
+    //         '<span class="breadcrumb-item">' +
+    //             '<a href="' + menu_link_href + '">' +
+    //                 '<i class="' + menu_link_icon_class + '"></i>' +
+    //                 menu_link_text +
+    //             '</a>' +
+    //         '</span>';
+    // });
+    // document.getElementById('Breadcrumb').innerHTML = txt;
 
     // 遍历查找目标路由
     console.log('routeList', this.routeList);

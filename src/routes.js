@@ -11,6 +11,7 @@ import UserLoginPage from './pages/UserLogin';
 import UserRegisterPage from './pages/UserRegister';
 import UserFindPasswordPage from './pages/UserFindPassword';
 import HomePage from './pages/Home';
+import UserListPage from './pages/UserList';
 /** 基础路由路径 */
 var basic_route_path = constant.ROUTE_PREFIX;
 export default {
@@ -31,6 +32,22 @@ export default {
         {
             component: window.homePage = new HomePage('#HomePage'),
             path: '/home'
+        },
+        {
+            component: window.userListPage = new UserListPage('#UserListPage'),
+            path: '/user/list'
+        },
+        {
+            component: window.userAddPage = new userAddPage('#UserAddPage'),
+            path: '/user/add'
+        },
+        {
+            component: window.userModPage = new UserModPage('#UserModPage'),
+            path: '/user/mod'
+        },
+        {
+            component: window.userInfoPage = new UserInfoPage('#UserInfoPage'),
+            path: '/user/info'
         }
     ]
 };

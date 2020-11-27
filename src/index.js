@@ -56,7 +56,7 @@ async function handleDocumentDOMContentLoaded (e) {
     window.addEventListener('resize', handleWindowResize);
     // 先显示应用加载页面，再去做应用使用前动作
     // TODO: 如何显示加载页面，需不需要路由跳转？？？在这里一共有几种情况：
-    // 1. 用户访问网站时 pathname 是路由表种其中一个路由地址
+    // 1. 用户访问网站时 pathname 是路由表中其中一个路由地址
     // 2. 
     var result = await app.checkAuth();
     // 检查用户鉴权是否通过
