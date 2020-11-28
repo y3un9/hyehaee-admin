@@ -37,5 +37,6 @@ UserFindPasswordPage.prototype.fetchPageData = function () {
  */
 UserFindPasswordPage.prototype.render = function () {
     this.form.reset();
+    this.fetchPageData();
 };
 export default UserFindPasswordPage;

@@ -6,7 +6,7 @@
  */
 
 import App from './pages/App';
-import Router from './pages/Router';
+import { Router } from './pages/Router';
 import Store from './pages/Store';
 
 import routes from './routes';

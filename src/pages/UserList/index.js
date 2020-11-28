@@ -6,6 +6,7 @@
  */
 
 import Page from '../../components/Page';
+import UserListSearchForm from './components/UserListSearchForm';
 
 /**
  * @constructor 用户列表页
@@ -14,6 +15,9 @@ import Page from '../../components/Page';
  */
 function UserListPage (selector) {
     Page.call(this, selector);
+
+    this.searchForm = new UserListSearchForm(this.rootElem.querySelector('#UserListSearchForm'));
+    this.table = null;
 }
 UserListPage.prototype = Object.create(Page.prototype);
 UserListPage.prototype.constructor = UserListPage;
@@ -21,7 +25,7 @@ UserListPage.prototype.constructor = UserListPage;
  * @method init
  */
 UserListPage.prototype.init = function () {
-
+    this.searchForm.init();
 };
 /**
  * @method fetchPageData
@@ -33,6 +37,10 @@ UserListPage.prototype.fetchPageData = function () {
  * @method render
  */
 UserListPage.prototype.render = function () {
+    this.searchForm.reset();
 
+    this.fetchPageData();
+
+    
 };
 export default UserListPage;

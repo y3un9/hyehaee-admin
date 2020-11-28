@@ -2,7 +2,7 @@
  * @file /src/pages/Router.js
  * @author SubwaySamurai
  * @date 2020/10/30
- * @description 路由
+ * @description 路由相关
  */
 
 import Component from '../../../../YUI个人组件库/yui-component/Component';
@@ -10,18 +10,39 @@ import Component from '../../../../YUI个人组件库/yui-component/Component';
 import util from '../utils/util';
 
 /**
- * @typedef {Object} Route
+ * @typedef {Object} RouteInterface
  * @property {Component} component
  * @property {string} path 
  */
 
 /**
  * @constructor 路由
- * @param {{ prefix: string, routeList: Array<Route> }} routes
+ * @param {RouteInterface} route
+ */
+function Route (route) {
+    this.component = route.component;
+    this.path = route.path;
+}
+Route.prototype = Object.create(null);
+Route.prototype.constructor = Route;
+
+/**
+ * @constructor 路由器
+ * @param {{ prefix: string, routeList: Array<RouteInterface> }} routes
  */
 function Router (routes) {
     this.routePrefix = routes.prefix;
     this.routeList = routes.routeList;
+    
+    this.routes = this.routeList.map(
+        /** @this Router */
+        function (item, index, array) {
+            return new Route({
+                component: item.component,
+                path: this.routePrefix + item.path
+            });
+        }.bind(this)
+    );
 }
 Router.prototype = Object.create(null);
 Router.prototype.constructor = Router;
@@ -203,8 +224,8 @@ Router.prototype.handle = function () {
     // document.getElementById('Breadcrumb').innerHTML = txt;
 
     // 遍历查找目标路由
-    console.log('routeList', this.routeList);
-    var target_route = util.getTargetItemFromArrayByKey(this.routeList, current_path, 'path');
+    console.log('routes', this.routes);
+    var target_route = util.getTargetItemFromArrayByKey(this.routes, current_path, 'path');
     console.log('target_route', target_route);
     if (target_route) {
         target_route.component.show();
@@ -213,4 +234,5 @@ Router.prototype.handle = function () {
         // TODO: 没有匹配到路由应该做些啥
     }
 };
-export default Router;
+
+export { Router, Route };
