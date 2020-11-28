@@ -7,6 +7,9 @@
 
 import Page from '../../components/Page';
 import UserListSearchForm from './components/UserListSearchForm';
+import UserListTable from './components/UserListTable';
+
+import * as service from '../../services';
 
 /**
  * @constructor 用户列表页
@@ -17,7 +20,7 @@ function UserListPage (selector) {
     Page.call(this, selector);
 
     this.searchForm = new UserListSearchForm(this.rootElem.querySelector('#UserListSearchForm'));
-    this.table = null;
+    this.table = new UserListTable(this.rootElem.querySelector('#UserListTable'));
 }
 UserListPage.prototype = Object.create(Page.prototype);
 UserListPage.prototype.constructor = UserListPage;
@@ -26,18 +29,28 @@ UserListPage.prototype.constructor = UserListPage;
  */
 UserListPage.prototype.init = function () {
     this.searchForm.init();
+    this.table.init();
+    this.table.setState({
+        tableColumn: []
+    });
 };
 /**
+ * 请求获取页面数据
  * @method fetchPageData
  */
-UserListPage.prototype.fetchPageData = function () {
-
+UserListPage.prototype.fetchPageData = async function () {
+    // 发起网络请求
+    var result = await service.fetchUserListPageData();
 };
 /**
  * @method render
  */
 UserListPage.prototype.render = function () {
     this.searchForm.reset();
+    this.table.setState({
+        tableData: []
+    });
+    this.table.render();
 
     this.fetchPageData();
 
