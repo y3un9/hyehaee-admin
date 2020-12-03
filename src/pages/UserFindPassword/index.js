@@ -30,7 +30,7 @@ UserFindPasswordPage.prototype.init = function () {
  * @method fetchPageData
  */
 UserFindPasswordPage.prototype.fetchPageData = function () {
-
+    // TODO: 
 };
 /**
  * @method render

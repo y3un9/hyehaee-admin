@@ -62,8 +62,9 @@ App.prototype.init = function () {
  * 作用是检查 “有无用户登录凭证” 或 “用户登录时效是否过期”  
  * 目的是 ~~鉴权成功时跳转至默认路由 / 鉴权失败时跳转至用户登录~~  
  * 目的是 为外部提供检查用户凭证接口  
+ * @async 
  * @method checkAuth
- * @returns {Promise<{boolean}>}
+ * @returns {Promise<boolean>}
  */
 App.prototype.checkAuth = async function () {
     if (!cookie.hasItem('user.session')) {
@@ -99,6 +100,7 @@ App.prototype.exit = function () {
     // TODO: 做一些别的事情
 };
 /**
+ * @async
  * @method fetchAppData
  */
 App.prototype.fetchAppData = async function () {
@@ -115,6 +117,6 @@ App.prototype.fetchAppData = async function () {
         // TODO:
         return;
     }
-
+    
 };
 export default App;

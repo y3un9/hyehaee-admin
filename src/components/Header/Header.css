@@ -3,6 +3,69 @@
 .page-header {
     position: relative;
     display: block;
-    height: ;
+    height: 64px;
+    overflow: hidden;
+}
+.page-header-bar {
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.page-header-bar-left {
+    display: block;
+    height: 100%;
+}
+.page-header-bar-right {
+    display: block;
+    height: 100%;
+}
+
+/* 侧边栏折叠按钮 */
+.sider-collapse-btn {
+    display: inline-block;
+    width: 64px;
+}
+.sider-collapse-btn:hover {
+
+}
+.sider-collapse-btn:active {
+
+}
+
+/* 页面重载按钮 */
+.page-reload-btn {
+
+}
+
+/* 面包屑导航 */
+.breadcrumb-wrapper {
+
+}
+
+/* 全局搜索栏 */
+.universal-searchbar {
+
+}
+
+/* 消息通知提示 */
+.message-nofitication-tip {
+    
+}
+
+/* 用户信息栏 */
+.user-info {
+
+}
+.user-info-avator {
+
+}
+.user-info-title {
+
+}
+
+/* 语言切换按钮 */
+.lang-switch-btn {
     
 }

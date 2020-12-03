@@ -38,5 +38,6 @@ UserChangePasswordPage.prototype.fetchPageData = function () {
  */
 UserChangePasswordPage.prototype.render = function () {
     this.form.reset();
+    this.fetchPageData();
 };
 export default UserChangePasswordPage;

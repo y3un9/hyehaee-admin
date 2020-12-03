@@ -23,8 +23,6 @@ function Route (route) {
     this.component = route.component;
     this.path = route.path;
 }
-Route.prototype = Object.create(null);
-Route.prototype.constructor = Route;
 
 /**
  * @constructor 路由器

@@ -7,16 +7,25 @@
 
 import constant from './utils/constant';
 // 各种页面组件
+import LoadingPage from './pages/Loading';
 import UserLoginPage from './pages/UserLogin';
 import UserRegisterPage from './pages/UserRegister';
 import UserFindPasswordPage from './pages/UserFindPassword';
+import UserChangePasswordPage from './pages/UserChangePassword';
 import HomePage from './pages/Home';
 import UserListPage from './pages/UserList';
+import UserAddPage from './pages/UserAdd';
+import UserModPage from './pages/UserMod';
+import UserInfoPage from './pages/UserInfo';
 /** 基础路由路径 */
 var basic_route_path = constant.ROUTE_PREFIX;
 export default {
     prefix: basic_route_path,
     routeList: [
+        // {
+        //     component: window.loadingPage = new LoadingPage('#LoadingPage'),
+        //     path: '/loading'
+        // },
         {
             component: window.userLoginPage = new UserLoginPage('#UserLoginPage'),
             path: '/user/login'
@@ -30,6 +39,10 @@ export default {
             path: '/user/findpassword'
         },
         {
+            component: window.userChangePasswordPage = new UserChangePasswordPage('#UserChangePasswordPage'),
+            path: '/user/changepassword'
+        },
+        {
             component: window.homePage = new HomePage('#HomePage'),
             path: '/home'
         },
@@ -38,7 +51,7 @@ export default {
             path: '/user/list'
         },
         {
-            component: window.userAddPage = new userAddPage('#UserAddPage'),
+            component: window.userAddPage = new UserAddPage('#UserAddPage'),
             path: '/user/add'
         },
         {
