@@ -10,7 +10,7 @@ import { Router } from './pages/Router';
 import Store from './pages/Store';
 
 import routes from './routes';
-import model from './model';
+import stores from './stores';
 import constant from './utils/constant';
 
 /** 运行环境 */
@@ -138,4 +138,4 @@ if (document.readyState === 'loading') {
 /** 应用实例 */
 window.app = new App('#App');
 window.appRouter = app.router = new Router(routes);
-window.globalStore = new Store(model);
+window.globalStore = new Store(stores);
