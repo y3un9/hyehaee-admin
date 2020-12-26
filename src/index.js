@@ -11,13 +11,13 @@ import Store from './pages/Store';
 
 import routes from './routes';
 import stores from './stores';
-import constant from './utils/constant';
+import constants from './utils/constants';
 
 /** 运行环境 */
-var runtime = constant.RUNTIME.DEV;
+var runtime = constants.RUNTIME.DEV;
 // 生产环境下移除所有控制台打印
 (function () {
-    if (runtime === constant.RUNTIME.PRD) {
+    if (runtime === constants.RUNTIME.PRD) {
         Object.keys(Window.console).forEach(function (key, index, array) {
             window.console[key] = function () {};
         });

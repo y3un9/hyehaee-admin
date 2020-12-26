@@ -1,5 +1,5 @@
 /**
- * @file /src/utils/constant.js
+ * @file /src/utils/constants.js
  * @author SubwaySamurai
  * @date 2020/10/30
  * @description 常量

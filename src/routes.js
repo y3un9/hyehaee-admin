@@ -5,7 +5,7 @@
  * @description 页面路由列表
  */
 
-import constant from './utils/constant';
+import constants from './utils/constants';
 // 各种页面组件
 import LoadingPage from './pages/Loading';
 import UserLoginPage from './pages/UserLogin';
@@ -18,7 +18,7 @@ import UserAddPage from './pages/UserAdd';
 import UserModPage from './pages/UserMod';
 import UserInfoPage from './pages/UserInfo';
 /** 基础路由路径 */
-var basic_route_path = constant.ROUTE_PREFIX;
+var basic_route_path = constants.ROUTE_PREFIX;
 export default {
     prefix: basic_route_path,
     routeList: [

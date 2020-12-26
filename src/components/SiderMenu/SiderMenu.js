@@ -7,6 +7,8 @@
 
 import Menu from '../../../../../YUI个人组件库/yui-component/Menu';
 
+import constants from '../../utils/constants';
+
 /**
  * @typedef {Object} MenuItem
  * @property {string|number} key
@@ -75,26 +77,28 @@ SiderMenu.prototype.handleMenuItemClick = function (e, elem) {
 /**
  * @override
  * @method renderMenuItem
- * @param {MenuItem} item 
+ * @param {MenuItem} data 
  */
-SiderMenu.prototype.renderMenuItem = function (item) {
+SiderMenu.prototype.renderMenuItem = function (data) {
     var self = this;
     var txt = '';
     // 判断菜单项下有没有子菜单
-    if (Array.isArray(item.submenu)) {
+    if (Array.isArray(data.submenu)) {
         txt +=
         `
             <li class="${this.state.menuItemClassName} ${this.state.menuItemSubmenuClassName}">
                 <a class="${this.state.menuItemLinkClassName}">
-                    <i class="${item.icon}"></i>
-                    <span>${item.title}</span>
+                    <i class="${data.icon}"></i>
+                    <span>${data.title}</span>
                     <span class="menu-item-submenu-arrow">
                         <i class=" fa fa-angle-up"></i>
                     </span>
                 </a>
                 <ul class="${this.state.submenuListClassName}">
-                    ${item.submenu.reduce(function (total, item, index, array) {
-                        return total.concat(self.renderMenuItem(item));
+                    ${data.submenu.reduce(function (total, item, index, array) {
+                        return total.concat(self.renderMenuItem(Object.assign({}, item, {
+
+                        })));
                     }, '')}
                 </ul>
             </li>
@@ -103,14 +107,28 @@ SiderMenu.prototype.renderMenuItem = function (item) {
         txt +=
         `
             <li class="${this.state.menuItemClassName}">
-                <a class="${this.state.menuItemLinkClassName}" href="${item.href}">
-                    <i class="${item.icon}"></i>
-                    <span>${item.title}</span>
+                <a class="${this.state.menuItemLinkClassName}" href="${data.href}">
+                    <i class="${data.icon}"></i>
+                    <span>${data.title}</span>
                 </a>
             </li>
         `;
     }
     return txt;
+};
+/**
+ * @override
+ * @method render
+ */
+SiderMenu.prototype.render = function () {
+    var txt = '';
+    var self = this;
+    this.state.menuData.forEach(function (item, index, array) {
+        txt += self.renderMenuItem(Object.assign({}, item, {
+            href: constants.ROUTE_PREFIX.concat(item.href)
+        }));
+    });
+    this.listElem.innerHTML = txt;
 };
 export default SiderMenu;
 

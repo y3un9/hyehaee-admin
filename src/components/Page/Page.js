@@ -28,6 +28,6 @@ Page.prototype.hide = function () {
  * @method show
  */
 Page.prototype.show = function () {
-    this.rootELem.style.display = 'block';
+    this.rootElem.style.display = 'block';
 };
 export default Page;

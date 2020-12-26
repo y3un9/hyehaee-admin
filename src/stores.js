@@ -5,19 +5,19 @@
  * @description 全局状态变量定义
  */
 
-import constant from './utils/constant';
+import constants from './utils/constants';
 
 export var siderMenuData = [
     {
         key: 'home',
         icon: 'fa fa-file-text-o',
         title: '首页',
-        href: `${constant.ROUTE_PREFIX}/home`
+        href: `/home`
     },
     {
         key: 'userManage',
         icon: 'fa fa-file-text-o',
         title: '用户管理',
-        href: `${constant.ROUTE_PREFIX}/user`
+        href: `/user`
     }
 ];
