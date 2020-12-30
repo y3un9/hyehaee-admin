@@ -10,7 +10,7 @@ import { Router } from './pages/Router';
 import Store from './pages/Store';
 
 import routes from './routes';
-import stores from './stores';
+import * as stores from './stores';
 import constants from './utils/constants';
 
 /** 运行环境 */
